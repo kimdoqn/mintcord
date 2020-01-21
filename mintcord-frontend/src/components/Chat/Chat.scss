@@ -1,6 +1,8 @@
 @import 'styles/utils.scss';
 
 .chat {
+	width: 100%;
+	
 	.chat-log {
 		background: $oc-yellow-0;
 		color: $oc-black;
