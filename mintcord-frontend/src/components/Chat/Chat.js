@@ -12,6 +12,7 @@ const Chat = () => {
 	// TODO: apply redux, cuz we have to store message until send
 	const [ message, setMessage ] = useState('');
 	const [ messageLog, setMessageLog] = useState([]);
+	const d = new Date();
 	const handleMessageChange = (event) => {
 		setMessage(event.target.value);
 	}
@@ -35,6 +36,7 @@ const Chat = () => {
 						me={msg.id % 2}
 						user={msg.id}
 						message={msg.txt}
+						time={(d.getMonth()+1) + "월" + d.getDate() + "일" + d.getSeconds()}
 						/>
 				))}
 			</div>
