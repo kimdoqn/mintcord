@@ -7,38 +7,42 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-const Chat = () => {
+const Chat = ({socketid, users, chatLogs, handleSendMessage}) => {
 	
 	// TODO: apply redux, cuz we have to store message until send
 	const [ message, setMessage ] = useState('');
-	const [ messageLog, setMessageLog] = useState([]);
+	//const [ messageLog, setMessageLog] = useState([]);
 	const d = new Date();
 	const handleMessageChange = (event) => {
 		setMessage(event.target.value);
-	}
+	};
 	const onClickButton = () => {
+		handleSendMessage(message); // ***
 		setMessage('');
-		setMessageLog([
-			...messageLog,
-			{
-				id: Math.floor(Math.random() * 100),
-				txt: message
-			}
-		]);
-	}
-	
+		// setMessageLog([
+		// 	...messageLog,
+		// 	{
+		// 		id: Math.floor(Math.random() * 100),
+		// 		txt: message
+		// 	}
+		// ]);
+	};
+	const logList = chatLogs.map((log, index) => {
+		return (
+			<MessageBox
+				key={index}
+				me = {socketid === log.sender? true : false}
+				user={log.sender}
+				message={log.message} 
+				time={(d.getMonth()+1) + "월" + d.getDate() + "일" + d.getSeconds()} 
+				/>
+		);
+	});
+				
 	return (
 		<div className={cx('chat')}>
 			<div className={cx('chat-log')}>
-				{messageLog.map(msg => (
-					<MessageBox 
-						key={msg.id}
-						me={msg.id % 2}
-						user={msg.id}
-						message={msg.txt}
-						time={(d.getMonth()+1) + "월" + d.getDate() + "일" + d.getSeconds()}
-						/>
-				))}
+				{logList}
 			</div>
 			<input
 				type='text'

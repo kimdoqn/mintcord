@@ -41,6 +41,9 @@
 	.message {
 		color: $oc-white;
 		fone-size: 1.5rem;
+		&:hover {
+			//TODO: Present icon list
+		}
 	}
 	
 	img {
@@ -50,5 +53,8 @@
 		margin-left: auto;
   		margin-right: auto;
 		justify-content: left;
+		&:hover {
+
+		}
 	}
 }
